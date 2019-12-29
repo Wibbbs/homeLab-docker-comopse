@@ -1,0 +1,18 @@
+version: "2"
+services:
+  openvpn-as:
+    image: linuxserver/openvpn-as
+    container_name: openVPN-AS
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=500
+      - PGID=500
+      - TZ=Amreica/Toronto
+    volumes:
+      - ./config:/config
+    ports:
+      - 943:943
+      - 9443:9443
+      - 1194:1194/udp
+    restart: unless-stopped

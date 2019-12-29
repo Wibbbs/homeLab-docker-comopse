@@ -1,0 +1,17 @@
+version: "3.5"
+services:
+  cAdvisor:
+    image: google/cadvisor:latest
+    container_name: cAdvisor
+    ports:
+      - 18080:8080
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    environment:
+      - VIRTUAL_HOST=cadvisor.awiebe.online
+      - VIRTUAL_PORT=8080

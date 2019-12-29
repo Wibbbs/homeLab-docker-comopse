@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx:/etc/nginx/conf.d
+  whoami:
+    image: jwilder/whoami
+    environment:
+      - VIRTUAL_HOST=whoaminew.awiebe.online

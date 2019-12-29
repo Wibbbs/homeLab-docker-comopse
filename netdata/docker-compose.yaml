@@ -1,0 +1,20 @@
+version: '3.5'
+services:
+  netdata:
+    image: netdata/netdata
+    container_name: netdata
+    hostname: CoreOS
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /home/core/docker-proxy/docker-proxy-acl/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - PGID=0
+      - VIRTUAL_HOST=netdata.awiebe.online
+      - VIRTUAL_PORT=19999
+    ports:
+      - 19999:19999

@@ -1,0 +1,23 @@
+version: "2"
+services:
+  letsencrypt:
+    image: linuxserver/letsencrypt
+    container_name: letsencrypt_portainer
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=500
+      - PGID=500
+      - TZ=America/Toronto
+      - URL=awiebe.online
+      - SUBDOMAINS=wildcard
+      - VALIDATION=dns
+      - DNSPLUGIN=cloudflare
+      - EMAIL=andrew.wiebe@gmail.com
+      - DHLEVEL=2048
+    volumes:
+      - ./config:/config
+    ports:
+      - 9001:443
+      #- 80:80 #optional
+    restart: unless-stopped

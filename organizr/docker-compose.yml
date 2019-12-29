@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  organizr:
+    image: organizrtools/organizr-v2
+    container_name: organizr
+    volumes:
+      - ./organizr:/config
+    environment:
+      - TZ=America/Toronto
+    restart: unless-stopped
+    ports:
+      - 9090:80
