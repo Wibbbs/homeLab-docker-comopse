@@ -17,10 +17,12 @@ services:
       - ./firefly_iii_upload:/var/www/firefly-iii/storage/upload
   firefly_iii_db: 
     image: "postgres:10"
-    environment:
-      - POSTGRES_PASSWORD=jfudirjf89f9i
-      - POSTGRES_USER=firefly
+    env_file: dbenv.env
+    #environment:
+    #  - POSTGRES_PASSWORD=**MOVEDTOdbenv.env
+    #  - POSTGRES_USER=firefly
     networks: 
       - firefly_iii_net
     volumes: 
       - ./postgres:/var/lib/postgresql/data
+      - ./backup:/home

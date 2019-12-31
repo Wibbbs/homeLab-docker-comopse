@@ -16,10 +16,6 @@ services:
     networks:
       pihole_network:
         ipv4_address: 192.168.0.6
-    environment:
-      TZ: America/Toronto
-      WEBPASSWORD: VqdYdmNBh73ED2NKyVGJkiKJjr6mtWmBNGh99Qd2
-      ServerIP: 192.168.0.209
     volumes:
       - ./etc-pihole/:/etc/pihole/
       - ./etc-dnsmasq.d/:/etc/dnsmasq.d/
@@ -27,11 +23,13 @@ services:
       - 127.0.0.1
       - 1.1.1.1
     restart: unless-stopped
-    environment:
-      - VIRTUAL_HOST=pihole.awiebe.online
-      - TZ=America/Toronto
-      - WEBPASSWORD=VqdYdmNBh73ED2NKyVGJkiKJjr6mtWmBNGh99Qd2
-      - ServerIP=192.168.0.6
+    #environment:
+    #  - VIRTUAL_HOST=**InENVfile**
+    #  - TZ=America/Toronto
+    #  - WEBPASSWORD=**InENVfile**
+    #  - ServerIP=192.168.0.6
+    env_file:
+      - ./env_variables.env
     #extra_hosts:
     #  - "RokuTV:192.168.0.10"
     #  - "BedroomPI:172.27.0.1"

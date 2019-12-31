@@ -2,13 +2,9 @@ version: '3'
 
 services:
   reverse:
-    container_name: reverse-proxy
-    hostname: reverse-proxy
+    container_name: nginx_customdash
     image: nginx
     ports:
-      - 80:80
-      - 443:443
+      - 9876:80
     volumes:
-    #  - ./config:/etc/nginx:ro
-    #  - ./certs:/etc/ssl/private:ro
-      - ./conf.d:/etc/nginx/conf.d
+      - ./content:/usr/share/nginx/html:ro
