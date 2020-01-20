@@ -1,0 +1,16 @@
+version: "2"
+services:
+  code-server:
+    image: linuxserver/code-server
+    container_name: code-server
+    environment:
+      - PUID=500
+      - PGID=500
+      - TZ=America/Toronto
+      #- PASSWORD=password #optional
+      #- SUDO_PASSWORD=password #optional
+    volumes:
+      - ./config:/config
+    ports:
+      - 7443:8443
+    restart: unless-stopped

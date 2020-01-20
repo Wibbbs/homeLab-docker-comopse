@@ -1,0 +1,36 @@
+version: "3.5"
+services:
+  influxDB:
+    image: influxdb:latest
+    container_name: influxDB
+    ports:
+      - 8086:8086
+    restart: unless-stopped
+    #user: 500
+    volumes:
+      - ./influxdb.conf:/etc/influxdb/influxdb.conf
+      - ./lib:/var/lib/influxdb
+    #environment:
+    #  - VIRTUAL_HOST=cadvisor.awiebe.online
+    #  - VIRTUAL_PORT=8080
+  telegraf:
+    image: telegraf:latest
+    container_name: teletgraf
+    restart: unless-stopped
+    #user: 500
+    volumes:
+      - /proc:/host/proc:ro
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf
+    environment:
+      - HOST_PROC=/host/proc
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    #volumes:
+    #  - /proc:/host/proc:ro
+    #  - ./telegraf.conf:/etc/telegraf/telegraf.conf
+    #environment:
+    #  - HOST_PROC=/host/proc
